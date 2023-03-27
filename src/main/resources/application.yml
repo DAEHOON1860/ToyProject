@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    open-in-view: false
+  datasource:
+    username: "root"
+    password: "Daehun1860"
+    jdbc-url: "jdbc:mysql://localhost:3303/toyproject?&serverTimezone=UTC&autoReconnect=true&allowMultiQueries=true&characterEncoding=UTF-8"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  config-location: classpath:/mybatis/mybatis-config.xml
