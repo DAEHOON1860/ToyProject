@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.mapper.BoardMapper">
+    <select id="getBoardList" resultType="demo.domain.Board">
+        SELECT *
+        FROM board;
+    </select>
+    <insert id="registerBoard">
+        INSERT INTO board (userId, subject, content, date, views)
+        values (#{userId}, #{subject}, #{content}, now(), #{views})
+    </insert>
+    <select id="selectBoard" resultType="demo.domain.Board">
+        SELECT *
+        FROM board
+        WHERE seq = #{seq};
+    </select>
+    <update id="updateViews">
+        update board
+        set views = views + 1
+        where seq = #{seq}
+    </update>
+    <delete id="deleteBoard">
+        delete from board
+    </delete>
+</mapper>

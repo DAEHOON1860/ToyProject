@@ -3,12 +3,14 @@ package demo.service;
 import demo.domain.User;
 import demo.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @Service
+@Repository
 public class UserService {
     private final UserMapper userMapper;
 

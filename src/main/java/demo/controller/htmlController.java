@@ -18,11 +18,6 @@ public class htmlController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/deletes")
-    public String deletes() {
-        return "delete";
-    }
-
     @GetMapping(value = "/register")
     public String register() {
         return "register";
@@ -31,13 +26,13 @@ public class htmlController {
     @PostMapping("/registers")
     public String insert(@RequestParam String userId, @RequestParam String userPass) {
         userService.insert(new User(userId, userPass));
-        return "register";
+        return "login";
     }
 
     @GetMapping(value = "/delete")
     public String delete() {
         userService.delete();
-        return "delete";
+        return "index";
     }
 
     @GetMapping(value = "/login")
@@ -49,6 +44,6 @@ public class htmlController {
     public String login(@RequestParam String userId, @RequestParam String userPass) {
         User user = userService.login(new User(userId, userPass));
         if (user == null) return "register";
-        else return "login";
+        else return "boardRegister";
     }
 }

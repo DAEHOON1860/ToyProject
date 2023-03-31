@@ -11,6 +11,8 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import javax.sql.DataSource;
 
@@ -21,7 +23,7 @@ public class dbConfig {
     @Value("classpath:/mapper/*.xml")
     String mPath;
 
-    @Value("${mybatis.config-location}")
+    @Value("classpath:/mybatis/mybatis-config.xml")
     String mybatisConfigPath;
 
     @Bean(name = "dataSource")
@@ -42,5 +44,18 @@ public class dbConfig {
     @Bean(name = "SessionTemplate")
     public SqlSessionTemplate SqlSessionTemplate(@Qualifier("SqlSessionFactory") SqlSessionFactory firstSqlSessionFactory) {
         return new SqlSessionTemplate(firstSqlSessionFactory);
+    }
+
+    @Bean
+    public ClassLoaderTemplateResolver secondaryTemplateResolver() {
+        ClassLoaderTemplateResolver secondaryTemplateResolver = new ClassLoaderTemplateResolver();
+        secondaryTemplateResolver.setPrefix("static/");
+        secondaryTemplateResolver.setSuffix(".html");
+        secondaryTemplateResolver.setTemplateMode(TemplateMode.HTML);
+        secondaryTemplateResolver.setCharacterEncoding("UTF-8");
+        secondaryTemplateResolver.setOrder(1);
+        secondaryTemplateResolver.setCheckExistence(true);
+
+        return secondaryTemplateResolver;
     }
 }
