@@ -20,6 +20,12 @@
         limit 1
     </select>
     <select id="getBoardList" resultType="demo.domain.Board">
-        SELECT * FROM board;
+        SELECT *
+        FROM board;
+    </select>
+    <select id="getUser" resultType="demo.domain.User">
+        SELECT *
+        FROM member
+        WHERE userId = #{userId}
     </select>
 </mapper>

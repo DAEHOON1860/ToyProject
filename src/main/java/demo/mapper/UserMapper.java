@@ -15,4 +15,5 @@ public interface UserMapper {
     void delete();
 
     User login(User user);
+    User getUser(String userId);
 }

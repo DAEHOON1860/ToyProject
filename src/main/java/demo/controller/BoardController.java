@@ -1,18 +1,18 @@
 package demo.controller;
 
 import demo.domain.Board;
+import demo.domain.User;
 import demo.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
+@SessionAttributes("user")
 public class BoardController {
     private final BoardService boardService;
 
@@ -22,7 +22,8 @@ public class BoardController {
     }
 
     @RequestMapping("/show/board")
-    public String getBoardList(Model model) {
+    public String getBoardList(Model model, @SessionAttribute(name = "user", required = false) User user) {
+        if (Objects.equals(null, user)) return "index";
         List<Board> boardList = boardService.getBoardList();
         model.addAttribute("boardList", boardList);
         return "board";
@@ -41,9 +42,10 @@ public class BoardController {
     }
 
     @RequestMapping("/show/selectBoard")
-    public String selectBoard(@RequestParam int seq, Model model) {
+    public String selectBoard(@RequestParam int seq, Model model, @SessionAttribute(name = "user", required = false) User user) {
         boardService.updateViews(seq);
         Board board = boardService.selectBoard(seq);
+        if (!Objects.equals(user.getUserId(), board.getUserId())) return "index";
         model.addAttribute("board", board);
         return "selectBoard";
     }

@@ -29,4 +29,8 @@ public class UserService {
     public User login(User user) {
         return userMapper.login(user);
     }
+
+    public User getUser(String userId) {
+        return userMapper.getUser(userId);
+    }
 }

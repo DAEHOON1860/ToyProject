@@ -4,11 +4,11 @@ import demo.domain.User;
 import demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
+@SessionAttributes("user")
 public class htmlController {
 
     private final UserService userService;
@@ -41,9 +41,19 @@ public class htmlController {
     }
 
     @PostMapping(value = "/logins")
-    public String login(@RequestParam String userId, @RequestParam String userPass) {
-        User user = userService.login(new User(userId, userPass));
-        if (user == null) return "register";
-        else return "boardRegister";
+    public String login(@ModelAttribute("user") User user,
+                        @RequestParam String userId, @RequestParam String userPass, SessionStatus sessionStatus) {
+        user = userService.login(new User(userId, userPass));
+        if (user == null) {
+            sessionStatus.setComplete();
+            return "register";
+        } else {
+            return "index";
+        }
+    }
+
+    @ModelAttribute("user")
+    public User setUpUserForm() {
+        return new User();
     }
 }
