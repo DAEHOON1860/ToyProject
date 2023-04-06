@@ -23,7 +23,6 @@ public class BoardController {
 
     @RequestMapping("/show/board")
     public String getBoardList(Model model, @SessionAttribute(name = "user", required = false) User user) {
-        if (Objects.equals(null, user)) return "index";
         List<Board> boardList = boardService.getBoardList();
         model.addAttribute("boardList", boardList);
         return "board";
