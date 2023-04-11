@@ -1,6 +1,7 @@
 package demo.controller;
 
 import demo.domain.User;
+import demo.domain.userPower;
 import demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +25,8 @@ public class htmlController {
     }
 
     @PostMapping("/registers")
-    public String insert(@RequestParam String userId, @RequestParam String userPass) {
-        userService.insert(new User(userId, userPass));
+    public String insert(@RequestParam String userId, @RequestParam String userPass, @RequestParam String power) {
+        userService.insert(new User(userId, userPass, power));
         return "login";
     }
 
@@ -42,7 +43,8 @@ public class htmlController {
 
     @PostMapping(value = "/logins")
     public String login(@ModelAttribute("user") User user,
-                        @RequestParam String userId, @RequestParam String userPass, SessionStatus sessionStatus) {
+                        @RequestParam String userId, @RequestParam String userPass,
+                        SessionStatus sessionStatus) {
         user = userService.login(new User(userId, userPass));
         if (user == null) {
             sessionStatus.setComplete();

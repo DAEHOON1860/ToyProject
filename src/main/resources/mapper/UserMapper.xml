@@ -6,8 +6,8 @@
         FROM member;
     </select>
     <insert id="insert">
-        insert into member(userId, userPass)
-        VALUES (#{userId}, #{userPass})
+        insert into member(userId, userPass, power)
+        VALUES (#{userId}, #{userPass}, #{power})
     </insert>
     <delete id="delete">
         delete

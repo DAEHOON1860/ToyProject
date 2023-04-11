@@ -23,5 +23,8 @@
         <td th:text="${board.views}"></td>
     </tr>
 </table>
+<form action="/delete/boardBySeq" method="post">
+    <button type="submit" th:value="${board.seq}" th:name="seq">게시글 삭제</button>
+</form>
 </body>
 </html>

@@ -30,5 +30,12 @@ public class BoardService {
     public void updateViews(int seq) {
         boardMapper.updateViews(seq);
     }
-    public void deleteBoard(){boardMapper.deleteBoard();}
+
+    public void deleteBoard() {
+        boardMapper.deleteBoard();
+    }
+
+    public void deleteBoardBySeq(int seq) {
+        boardMapper.deleteBoardBySeq(seq);
+    }
 }

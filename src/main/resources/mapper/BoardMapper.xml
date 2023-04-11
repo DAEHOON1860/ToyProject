@@ -20,6 +20,12 @@
         where seq = #{seq}
     </update>
     <delete id="deleteBoard">
-        delete from board
+        delete
+        from board
+    </delete>
+    <delete id="deleteBoardBySeq">
+        delete
+        from board
+        where seq = #{seq};
     </delete>
 </mapper>

@@ -23,6 +23,7 @@ public class BoardController {
 
     @RequestMapping("/show/board")
     public String getBoardList(Model model, @SessionAttribute(name = "user", required = false) User user) {
+        if (user == null) return "index";
         List<Board> boardList = boardService.getBoardList();
         model.addAttribute("boardList", boardList);
         return "board";
@@ -52,6 +53,12 @@ public class BoardController {
     @GetMapping("/delete/board")
     public String deleteBoard() {
         boardService.deleteBoard();
+        return "index";
+    }
+
+    @PostMapping("/delete/boardBySeq")
+    public String deleteBoardBySeq(@RequestParam int seq) {
+        boardService.deleteBoardBySeq(seq);
         return "index";
     }
 }

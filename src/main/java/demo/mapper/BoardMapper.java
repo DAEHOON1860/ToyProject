@@ -14,4 +14,5 @@ public interface BoardMapper {
 
     void updateViews(int seq);
     void deleteBoard();
+    void deleteBoardBySeq(int seq);
 }
