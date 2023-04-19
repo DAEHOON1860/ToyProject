@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 작성폼</title>
+</head>
+
+<style>
+    .layout {
+        width: 500px;
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+
+    .layout input {
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 10px;
+    }
+
+    .layout textarea {
+        width: 100%;
+        margin-top: 10px;
+        min-height: 300px;
+    }
+</style>
+<body>
+<div class="layout">
+    <form th:action="@{/board/update/{seq}(seq=${board.seq})}" method="post">
+        <label>
+            제목:
+            <input type="text" th:value="${board.subject}" name="subject">
+        </label>
+        <label>
+            내용:
+            <textarea th:text="${board.content}" name="content"></textarea>
+        </label>
+        <button type="submit" value="게시글 수정">수정</button>
+    </form>
+</div>
+</body>
+</html>

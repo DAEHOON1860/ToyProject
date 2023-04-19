@@ -1,7 +1,6 @@
 package demo.controller;
 
 import demo.domain.User;
-import demo.domain.userPower;
 import demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

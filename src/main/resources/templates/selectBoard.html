@@ -26,5 +26,29 @@
 <form action="/delete/boardBySeq" method="post">
     <button type="submit" th:value="${board.seq}" th:name="seq">게시글 삭제</button>
 </form>
+<form action="/board/modify" method="get">
+    <button type="submit" th:value="${board.seq}" th:name="seq">게시글 수정</button>
+</form>
+<table>
+    <tr>
+        <th>댓글 작성자</th>
+        <th>댓글 내용</th>
+    </tr>
+    <tr th:each="comment : ${comment}">
+        <td th:text="${comment.id}"></td>
+        <td th:text="${comment.content}"></td>
+    </tr>
+</table>
+<form action="/registerComment" method="post">
+    <label>
+        댓글 작성자:
+        <input type="text" name="id">
+    </label><br>
+    <label>
+        댓글 내용:
+        <input type="text" name="content">
+    </label><br>
+    <button type="submit" th:value="${board.seq}" th:name="seq">댓글등록</button>
+</form>
 </body>
 </html>

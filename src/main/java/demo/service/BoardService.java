@@ -1,6 +1,7 @@
 package demo.service;
 
 import demo.domain.Board;
+import demo.domain.comment;
 import demo.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -37,5 +38,17 @@ public class BoardService {
 
     public void deleteBoardBySeq(int seq) {
         boardMapper.deleteBoardBySeq(seq);
+    }
+
+    public void updateBoard(String subject, String content, int seq) {
+        boardMapper.updateBoard(subject, content, seq);
+    }
+
+    public List<comment> selectComment(int seq) {
+        return boardMapper.selectComment(seq);
+    }
+
+    public void registerComment(int seq, String id, String content) {
+        boardMapper.registerComment(seq, id, content);
     }
 }

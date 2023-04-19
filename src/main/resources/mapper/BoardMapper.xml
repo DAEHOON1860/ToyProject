@@ -28,4 +28,19 @@
         from board
         where seq = #{seq};
     </delete>
+    <update id="updateBoard">
+        update board
+        set content = #{content},
+            subject = #{subject}
+        where seq = #{seq}
+    </update>
+    <select id="selectComment" resultType="demo.domain.comment">
+        select *
+        from comment
+        where seq = #{seq};
+    </select>
+    <insert id="registerComment">
+        insert into comment (seq, id, content)
+        VALUES (#{seq}, #{id}, #{content})
+    </insert>
 </mapper>
